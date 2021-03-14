@@ -1,8 +1,12 @@
 public class Frame {
     private Frame nextFrame;
     private Frame secondNextFrame;
+    private Ball ball1, ball2;
 
-    public Frame(int ball1, int ball2) {
+    public Frame(int ball1Pins, int ball2Pins) {
+        this.ball1 = new Ball(ball1Pins);
+        if (ball1Pins != 10)
+            this.ball2 = new Ball(ball2Pins);
     }
 
     public void setNextFrame(Frame nextFrame) {
