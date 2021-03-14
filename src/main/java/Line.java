@@ -23,26 +23,19 @@ public class Line {
             frames.add(newFrame);
             // link previous frames to the new one
             int indexOfLastFrame = frames.size()-1;
-            System.out.println("frames.size() is now "+indexOfLastFrame);
-            if (indexOfLastFrame >= 1) {
-                System.out.println("linking 1");
+            if (indexOfLastFrame >= 1)
                 frames.get(indexOfLastFrame - 1).setNextFrame(newFrame);
-            }
-            if (indexOfLastFrame >= 2) {
-                System.out.println("linking 2");
+            if (indexOfLastFrame >= 2)
                 frames.get(indexOfLastFrame - 2).setSecondNextFrame(newFrame);
-            }
         }
     }
 
     public int calculateScore() {
         // calculate score
         int score = 0;
-        System.out.println("score is now "+score);
         int i = 0;
         while(i < frames.size() && i < 10){
             score += frames.get(i).calculateScore();
-            System.out.println("score is now "+score);
             i++;
         }
         return score;
