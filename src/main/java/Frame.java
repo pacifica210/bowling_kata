@@ -1,24 +1,24 @@
 public class Frame {
-    private Frame next;
-    private Frame secondNext;
+    private Frame nextFrame;
+    private Frame secondNextFrame;
 
     public Frame(int ball1, int ball2) {
     }
 
-    public void setNext(Frame next) {
-        this.next = next;
+    public void setNextFrame(Frame nextFrame) {
+        this.nextFrame = nextFrame;
     }
 
-    public Frame getNext() {
-        return next;
+    public void setSecondNextFrame(Frame secondNextFrame) {
+        this.secondNextFrame = secondNextFrame;
     }
 
-    public void setSecondNext(Frame secondNext) {
-        this.secondNext = secondNext;
+    public Ball getBall1() {
+        return ball1;
     }
 
-    public Frame getSecondNext() {
-        return secondNext;
+    public Ball getBall2() {
+        return ball2;
     }
 
     public int calculateScore() {

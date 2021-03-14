@@ -27,8 +27,8 @@ public class FrameTest {
         Frame frameA = new Frame(frameABall1, frameABall2);
         Frame frameB = new Frame(frameBBall1, frameBBall2); // this is necessary to have strictly separated frames
         Frame frameC = new Frame(frameCBall1, frameCBall2);
-        frameA.setNext(frameB);
-        frameA.setSecondNext(frameC);
+        frameA.setNextFrame(frameB);
+        frameA.setSecondNextFrame(frameC);
         return () -> assertEquals(result, frameA.calculateScore());
     }
 
@@ -50,8 +50,8 @@ public class FrameTest {
         Frame frameA = new Frame(frameABall1, frameABall2);
         Frame frameB = new Frame(frameBBall1, frameBBall2); // this is necessary to have strictly separated frames
         Frame frameC = new Frame(frameCBall1, frameCBall2);
-        frameA.setNext(frameB);
-        frameA.setSecondNext(frameC);
+        frameA.setNextFrame(frameB);
+        frameA.setSecondNextFrame(frameC);
         return () -> assertEquals(result, frameA.calculateScore() + frameB.calculateScore() + frameC.calculateScore());
     }
 
