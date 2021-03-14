@@ -3,6 +3,9 @@ public class Frame {
     private Frame secondNextFrame;
     private Ball ball1, ball2;
 
+    public Frame(){
+    }
+
     public Frame(int ball1Pins, int ball2Pins) {
         this.ball1 = new Ball(ball1Pins);
         if (ball1Pins != 10)
@@ -23,6 +26,11 @@ public class Frame {
 
     public Ball getBall2() {
         return ball2;
+    }
+
+    public boolean isFinished(){
+        // is true if ball1 and ball2 exist or if ball1 exists and is 10.
+        return ball1 != null && (ball2 != null || ball1.getPins() == 10);
     }
 
     public int calculateScore() {
