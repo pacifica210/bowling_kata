@@ -28,6 +28,13 @@ public class Frame {
         return ball2;
     }
 
+    public void addBall(int ballPins){
+        if (ball1 == null)
+            ball1 = new Ball(ballPins);
+        else
+            ball2 = new Ball(ballPins);
+    }
+
     public boolean isFinished(){
         // is true if ball1 and ball2 exist or if ball1 exists and is 10.
         return ball1 != null && (ball2 != null || ball1.getPins() == 10);
