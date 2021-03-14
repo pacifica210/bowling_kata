@@ -45,19 +45,15 @@ public class Frame {
             // if strike or spare, add bonus
             if (score == 10) {
                 score += nextFrame.getBall1().getPins();
-                System.out.println("check1 = "+score);
             }
             // if strike, add second bonus (2nd ball or 1st of second next frame)
             if (ball1.getPins() == 10) {
                 if (nextFrame.getBall1().getPins() < 10){
                     score += nextFrame.getBall2().getPins();
-                    System.out.println("check2");
                 }
                 else {
-                    System.out.println("check3");
                     if (secondNextFrame != null && secondNextFrame.getBall1() != null) {
                         score += secondNextFrame.getBall1().getPins();
-                        System.out.println("check4");
                     }
                 }
             }
