@@ -5,6 +5,10 @@ public class Line {
 
     private ArrayList<Frame> frames = new ArrayList();
 
+    public Line(){
+        frames.add(new Frame());
+    }
+
     private Frame getLastFrame(){
         return frames.get(frames.size()-1);
     }
