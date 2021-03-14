@@ -43,11 +43,11 @@ public class Frame {
         // if next frame has at least ball 1
         if (nextFrame != null && nextFrame.getBall1() != null) {
             // if strike or spare, add bonus
-            if (score == 10) {
+            if (score == 10 && nextFrame.getBall1() != null) {
                 score += nextFrame.getBall1().getPins();
             }
             // if strike, add second bonus (2nd ball or 1st of second next frame)
-            if (ball1.getPins() == 10) {
+            if (ball1.getPins() == 10 && nextFrame.getBall1() != null) {
                 if (nextFrame.getBall1().getPins() < 10){
                     score += nextFrame.getBall2().getPins();
                 }
