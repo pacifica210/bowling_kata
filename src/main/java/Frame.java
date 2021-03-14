@@ -26,6 +26,32 @@ public class Frame {
     }
 
     public int calculateScore() {
-        return 0;
+        int score = ball1.getPins();
+        if (ball2 != null)
+            score += ball2.getPins();
+
+        // if next frame has at least ball 1
+        if (nextFrame != null && nextFrame.getBall1() != null) {
+            // if strike or spare, add bonus
+            if (score == 10) {
+                score += nextFrame.getBall1().getPins();
+                System.out.println("check1 = "+score);
+            }
+            // if strike, add second bonus (2nd ball or 1st of second next frame)
+            if (ball1.getPins() == 10) {
+                if (nextFrame.getBall1().getPins() < 10){
+                    score += nextFrame.getBall2().getPins();
+                    System.out.println("check2");
+                }
+                else {
+                    System.out.println("check3");
+                    if (secondNextFrame != null && secondNextFrame.getBall1() != null) {
+                        score += secondNextFrame.getBall1().getPins();
+                        System.out.println("check4");
+                    }
+                }
+            }
+        }
+        return score;
     }
 }
