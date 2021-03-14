@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Line {
 
-    private ArrayList<Frame> frames = new ArrayList();
+    private final ArrayList<Frame> frames = new ArrayList<>();
 
     public Line(){
         frames.add(new Frame());
