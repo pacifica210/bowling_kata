@@ -23,7 +23,7 @@ public class FrameTest {
         assertAll(listOfAsserts);
     }
 
-    private Executable createAssertForThreeFrames(int frameABall1, int frameABall2, int frameBBall1, int frameBBall2, int frameCBall1, int frameCBall2, int result){
+    private Executable createAssertForThreeFramesOnlyFirstFrame(int frameABall1, int frameABall2, int frameBBall1, int frameBBall2, int frameCBall1, int frameCBall2, int result){
         Frame frameA = new Frame(frameABall1, frameABall2);
         Frame frameB = new Frame(frameBBall1, frameBBall2); // this is necessary to have strictly separated frames
         Frame frameC = new Frame(frameCBall1, frameCBall2);
@@ -33,15 +33,38 @@ public class FrameTest {
     }
 
     @Test
-    @DisplayName("test frame combinations")
-    void testFrameCombinations() {
+    @DisplayName("test frame combinations, only first frame")
+    void testFrameCombinationsOnlyFirstFrame() {
         Collection<Executable> listOfAsserts = new LinkedList<>();
 
-        listOfAsserts.add(createAssertForThreeFrames(0, 0, 0, 0, 0, 0, 0));
-        listOfAsserts.add(createAssertForThreeFrames(0, 0, 0, 0, 0, 1, 1));
-        listOfAsserts.add(createAssertForThreeFrames(9, 0, 8, 0, 7, 0, 24));
-        listOfAsserts.add(createAssertForThreeFrames(9, 1, 8, 2, 7, 3, 50));
-        listOfAsserts.add(createAssertForThreeFrames(10, 0, 9, 1, 3, 6, 42));
+        listOfAsserts.add(createAssertForThreeFramesOnlyFirstFrame(0, 0, 0, 0, 0, 0, 0));
+        listOfAsserts.add(createAssertForThreeFramesOnlyFirstFrame(0, 0, 0, 0, 0, 1, 0));
+        listOfAsserts.add(createAssertForThreeFramesOnlyFirstFrame(9, 0, 8, 0, 7, 0, 9));
+        listOfAsserts.add(createAssertForThreeFramesOnlyFirstFrame(9, 1, 8, 2, 7, 3, 18));
+        listOfAsserts.add(createAssertForThreeFramesOnlyFirstFrame(10, 0, 9, 1, 3, 6, 20));
+
+        assertAll(listOfAsserts);
+    }
+
+    private Executable createAssertForThreeFramesSumOfThreeFrames(int frameABall1, int frameABall2, int frameBBall1, int frameBBall2, int frameCBall1, int frameCBall2, int result){
+        Frame frameA = new Frame(frameABall1, frameABall2);
+        Frame frameB = new Frame(frameBBall1, frameBBall2); // this is necessary to have strictly separated frames
+        Frame frameC = new Frame(frameCBall1, frameCBall2);
+        frameA.setNext(frameB);
+        frameA.setSecondNext(frameC);
+        return () -> assertEquals(result, frameA.calculateScore() + frameB.calculateScore() + frameC.calculateScore());
+    }
+
+    @Test
+    @DisplayName("test frame combinations, sum of three frame")
+    void testFrameCombinationsSumOfThreeFrames() {
+        Collection<Executable> listOfAsserts = new LinkedList<>();
+
+        listOfAsserts.add(createAssertForThreeFramesSumOfThreeFrames(0, 0, 0, 0, 0, 0, 0));
+        listOfAsserts.add(createAssertForThreeFramesSumOfThreeFrames(0, 0, 0, 0, 0, 1, 1));
+        listOfAsserts.add(createAssertForThreeFramesSumOfThreeFrames(9, 0, 8, 0, 7, 0, 24));
+        listOfAsserts.add(createAssertForThreeFramesSumOfThreeFrames(9, 1, 8, 2, 7, 3, 50));
+        listOfAsserts.add(createAssertForThreeFramesSumOfThreeFrames(10, 0, 9, 1, 3, 6, 42));
 
         assertAll(listOfAsserts);
     }
