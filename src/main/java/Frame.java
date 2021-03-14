@@ -26,7 +26,9 @@ public class Frame {
     }
 
     public int calculateScore() {
-        int score = ball1.getPins();
+        int score = 0;
+        if (ball1 != null)
+            score += ball1.getPins();
         if (ball2 != null)
             score += ball2.getPins();
 
