@@ -1,27 +1,70 @@
 public class Frame {
-    private Frame next;
-    private Frame secondNext;
+    private Frame nextFrame;
+    private Frame secondNextFrame;
+    private Ball ball1, ball2;
 
-    public Frame(int ball1, int ball2) {
+    public Frame(){
     }
 
-    public void setNext(Frame next) {
-        this.next = next;
+    public Frame(int ball1Pins, int ball2Pins) {
+        this.ball1 = new Ball(ball1Pins);
+        if (ball1Pins != 10)
+            this.ball2 = new Ball(ball2Pins);
     }
 
-    public Frame getNext() {
-        return next;
+    public void setNextFrame(Frame nextFrame) {
+        this.nextFrame = nextFrame;
     }
 
-    public void setSecondNext(Frame secondNext) {
-        this.secondNext = secondNext;
+    public void setSecondNextFrame(Frame secondNextFrame) {
+        this.secondNextFrame = secondNextFrame;
     }
 
-    public Frame getSecondNext() {
-        return secondNext;
+    public Ball getBall1() {
+        return ball1;
+    }
+
+    public Ball getBall2() {
+        return ball2;
+    }
+
+    public void addBall(int ballPins){
+        if (ball1 == null)
+            ball1 = new Ball(ballPins);
+        else
+            ball2 = new Ball(ballPins);
+    }
+
+    public boolean isFinished(){
+        // is true if ball1 and ball2 exist or if ball1 exists and is 10.
+        return ball1 != null && (ball2 != null || ball1.getPins() == 10);
     }
 
     public int calculateScore() {
-        return 0;
+        int score = 0;
+        if (ball1 != null)
+            score += ball1.getPins();
+        if (ball2 != null)
+            score += ball2.getPins();
+
+        // if next frame has at least ball 1
+        if (nextFrame != null && nextFrame.getBall1() != null) {
+            // if strike or spare, add bonus
+            if (score == 10 && nextFrame.getBall1() != null) {
+                score += nextFrame.getBall1().getPins();
+            }
+            // if strike, add second bonus (2nd ball or 1st of second next frame)
+            if (ball1.getPins() == 10 && nextFrame.getBall1() != null) {
+                if (nextFrame.getBall1().getPins() < 10){
+                    score += nextFrame.getBall2().getPins();
+                }
+                else {
+                    if (secondNextFrame != null && secondNextFrame.getBall1() != null) {
+                        score += secondNextFrame.getBall1().getPins();
+                    }
+                }
+            }
+        }
+        return score;
     }
 }

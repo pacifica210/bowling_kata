@@ -25,10 +25,10 @@ public class FrameTest {
 
     private Executable createAssertForThreeFramesOnlyFirstFrame(int frameABall1, int frameABall2, int frameBBall1, int frameBBall2, int frameCBall1, int frameCBall2, int result){
         Frame frameA = new Frame(frameABall1, frameABall2);
-        Frame frameB = new Frame(frameBBall1, frameBBall2); // this is necessary to have strictly separated frames
+        Frame frameB = new Frame(frameBBall1, frameBBall2);
         Frame frameC = new Frame(frameCBall1, frameCBall2);
-        frameA.setNext(frameB);
-        frameA.setSecondNext(frameC);
+        frameA.setNextFrame(frameB);
+        frameA.setSecondNextFrame(frameC);
         return () -> assertEquals(result, frameA.calculateScore());
     }
 
@@ -48,10 +48,11 @@ public class FrameTest {
 
     private Executable createAssertForThreeFramesSumOfThreeFrames(int frameABall1, int frameABall2, int frameBBall1, int frameBBall2, int frameCBall1, int frameCBall2, int result){
         Frame frameA = new Frame(frameABall1, frameABall2);
-        Frame frameB = new Frame(frameBBall1, frameBBall2); // this is necessary to have strictly separated frames
+        Frame frameB = new Frame(frameBBall1, frameBBall2);
         Frame frameC = new Frame(frameCBall1, frameCBall2);
-        frameA.setNext(frameB);
-        frameA.setSecondNext(frameC);
+        frameA.setNextFrame(frameB);
+        frameA.setSecondNextFrame(frameC);
+        frameB.setNextFrame(frameC);
         return () -> assertEquals(result, frameA.calculateScore() + frameB.calculateScore() + frameC.calculateScore());
     }
 
@@ -63,7 +64,8 @@ public class FrameTest {
         listOfAsserts.add(createAssertForThreeFramesSumOfThreeFrames(0, 0, 0, 0, 0, 0, 0));
         listOfAsserts.add(createAssertForThreeFramesSumOfThreeFrames(0, 0, 0, 0, 0, 1, 1));
         listOfAsserts.add(createAssertForThreeFramesSumOfThreeFrames(9, 0, 8, 0, 7, 0, 24));
-        listOfAsserts.add(createAssertForThreeFramesSumOfThreeFrames(9, 1, 8, 2, 7, 3, 50));
+        listOfAsserts.add(createAssertForThreeFramesSumOfThreeFrames(9, 1, 8, 2, 0, 0, 28));
+        listOfAsserts.add(createAssertForThreeFramesSumOfThreeFrames(9, 1, 8, 2, 7, 1, 43));
         listOfAsserts.add(createAssertForThreeFramesSumOfThreeFrames(10, 0, 9, 1, 3, 6, 42));
 
         assertAll(listOfAsserts);
